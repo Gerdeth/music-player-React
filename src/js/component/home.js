@@ -10,7 +10,7 @@ export class Home extends React.Component {
 
 		this.state = {
 			//changes on reload
-			currentIndex: 1,
+			currentIndex: 0,
 			songs: [
 				{
 					title: "South Park",
@@ -68,9 +68,7 @@ export class Home extends React.Component {
 	render() {
 		const liList = this.state.songs.map((song, index) => {
 			return (
-				<li
-					key={index}
-					onClick={() => this.play(this.state.currentIndex)}>
+				<li key={index} onClick={() => this.play(index)}>
 					<span> {index + 1}</span>
 					<span> {song.name} </span>
 				</li>
@@ -78,7 +76,7 @@ export class Home extends React.Component {
 		});
 
 		const audioPlayer = (
-			<>
+			<div className="buttonArea">
 				<div>
 					<button
 						onClick={() => this.play(this.state.currentIndex - 1)}>
@@ -99,16 +97,15 @@ export class Home extends React.Component {
 						<i className="fa fa-caret-right" aria-hidden="true" />
 					</button>
 				</div>
-
 				<audio ref={element => (this.audio = element)} />
-			</>
+			</div>
 		);
 
 		return (
-			<>
+			<div className="page">
+				<ul> {liList} </ul>
 				{audioPlayer}
-				<ul>{liList}</ul>
-			</>
+			</div>
 		);
 	}
 }
